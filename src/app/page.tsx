@@ -1,11 +1,10 @@
+import { Hero } from "@/components/hero";
 import { ThemeToggler } from "@/components/theme-toggler";
-import Image from "next/image";
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      Home
-      <ThemeToggler />
+    <div className="relative flex flex-col items-center justify-center container max-w-screen min-h-screen font-[family-name:var(--font-geist-sans)] overflow-hidden">
+      <Hero />
     </div>
   );
 }

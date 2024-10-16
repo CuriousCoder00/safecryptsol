@@ -1,5 +1,6 @@
 "use client";
 import { MnemonicWarning } from "@/components/mnemonic-warning";
+import { Password } from "@/components/password";
 import { SecretPhrase } from "@/components/secret-phrase";
 import { useState } from "react";
 
@@ -10,6 +11,7 @@ const CreateWalletPage = ({}: Props) => {
     <div className="flex flex-col items-center justify-center max-w-screen min-h-screen gap-6">
       {tab === "onboarding" && <MnemonicWarning setTab={setTab} />}
       {tab === "secret" && <SecretPhrase setTab={setTab} />}
+      {tab === "password" && <Password />}
     </div>
   );
 };

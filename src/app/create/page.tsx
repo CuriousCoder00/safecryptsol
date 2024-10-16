@@ -13,7 +13,9 @@ const CreateWalletPage = ({}: Props) => {
   return (
     <div className="flex flex-col items-center justify-center max-w-screen min-h-screen gap-6">
       <div className="flex flex-col justify-center items-center gap-2">
-        <h1 className="text-4xl font-bold">Secret Recovery Phrase Warning</h1>
+        <h1 className="text-4xl font-bold text-center">
+          Secret Recovery Phrase Warning
+        </h1>
         <p className="text-md text-slate-500 font-semibold max-w-[400px] text-center">
           On the next page, you will receive your secret recovery phrase.
         </p>
@@ -39,7 +41,12 @@ const CreateWalletPage = ({}: Props) => {
         </div>
 
         <div className="flex items-start gap-3">
-          <Input type="checkbox" className="size-10" id="concern" />
+          <Input
+            type="checkbox"
+            className="size-10 cursor-pointer"
+            id="concern"
+            onChange={() => setChecked(!checked)}
+          />
           <Label
             htmlFor="concern"
             className="text-md cursor-pointer hover:text-slate-300"

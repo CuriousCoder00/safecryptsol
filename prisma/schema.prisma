@@ -8,9 +8,11 @@ generator client {
 }
 
 model User {
-  id String @id @default(uuid()) @map("_id")
-  name String
-  email    String  @unique
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  name  String
+  email String @unique
+
   image    String?
   accounts Account[]
 
@@ -20,8 +22,8 @@ model User {
 }
 
 model Account {
-  id                String  @id @default(cuid()) @map("_id")
-  userId            String
+  id                String  @id @default(auto()) @map("_id") @db.ObjectId
+  userId            String  @db.ObjectId
   type              String
   provider          String
   providerAccountId String

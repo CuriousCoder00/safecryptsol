@@ -11,7 +11,7 @@ const CreateWallet = ({}: Props) => {
     <div className="flex flex-col items-center justify-center max-w-screen min-h-screen gap-6">
       {tab === "onboarding" && <MnemonicWarning setTab={setTab} />}
       {tab === "secret" && <SecretPhrase setTab={setTab} />}
-      {tab === "password" && <Password />}
+      {tab === "wallet-created" && <Password />}
     </div>
   );
 };

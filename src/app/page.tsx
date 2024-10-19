@@ -9,7 +9,7 @@ export default function Home() {
       <Hero />
       {
         session?.data?.user ? (
-          'Okay'
+          null
         ) : null
       }
     </div>

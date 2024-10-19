@@ -2,6 +2,7 @@
 import { generateMnemonic } from "bip39";
 import { auth } from "@/lib/auth";
 import db from "@/lib/db";
+
 export const SaveMnemonics = async () => {
   const sessionData = await auth();
   const user = sessionData?.user;
@@ -17,3 +18,4 @@ export const SaveMnemonics = async () => {
     return error;
   }
 };
+

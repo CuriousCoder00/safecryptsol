@@ -17,7 +17,7 @@ export default auth((req) => {
   if (nextUrl.pathname.startsWith("/api/auth")) return;
 
   if (!isLoggedIn && nextUrl.pathname !== "/") {
-    return Response.redirect(new URL("/", nextUrl));
+    return Response.redirect(new URL("/wallet", nextUrl));
   }
 
   return;

@@ -1,7 +1,13 @@
-import NextAuth from "next-auth";
+import NextAuth, { Session } from "next-auth";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import Google from "next-auth/providers/google";
 import db from "./db";
+
+declare module "next-auth" {
+  interface Session {
+    id: string;
+  }
+}
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   events: {
@@ -24,6 +30,18 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   callbacks: {
     async signIn({ user, account }) {
       return true;
+    },
+    async jwt({ token, user }) {
+      if (user) {
+        token.id = user.id;
+      }
+      return token;
+    },
+    async session({ session, token }) {
+      if (session?.user) {
+        session.user.id = (token.sub as string) || (token.id as string);
+      }
+      return session;
     },
   },
   adapter: PrismaAdapter(db),

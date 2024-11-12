@@ -44,10 +44,8 @@ model Account {
 }
 
 model Wallet {
-  id      String @id @default(auto()) @map("_id") @db.ObjectId
-  userId  String @db.ObjectId
-  name    String
-  address String
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId     String   @db.ObjectId
   mnemonics  String[]
   publicKey  String
   privateKey String

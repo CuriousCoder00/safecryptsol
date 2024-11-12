@@ -1,9 +1,11 @@
 "use client";
 import { Button } from "../ui/button";
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import LOGO from "../../assets/image.png";
 import Image from "next/image";
+import Link from "next/link";
 export const Hero = () => {
+  const session = useSession();
   return (
     <div className="flex lg:items-center md:flex-row flex-col justify-center gap-6 sm:px-12 px-6 max-md:pt-24 md:pt-16 bg-gray-950 min-h-screen max-w-screen-2xl">
       <div className="flex flex-col items-start justify-start md:w-2/3 lg:w-1/2 text-start">
@@ -21,12 +23,20 @@ export const Hero = () => {
           </p>
         </div>
         <div className="flex items-center justify-start mt-10 gap-4 w-full">
-          <Button
-            className="text-md bg-rose-500 hover:bg-rose-600 text-white px-6 py-3 rounded-lg h-12 max-sm:w-full"
-            onClick={() => signIn("google", { callbackUrl: "/" })}
-          >
-            Get Started
-          </Button>
+          {session?.data?.user ? (
+            <Link href="/wallet">
+              <Button className="text-md bg-rose-500 hover:bg-rose-600 text-white px-6 py-3 rounded-lg h-12 max-sm:w-full">
+                Go to Wallet
+              </Button>
+            </Link>
+          ) : (
+            <Button
+              className="text-md bg-rose-500 hover:bg-rose-600 text-white px-6 py-3 rounded-lg h-12 max-sm:w-full"
+              onClick={() => signIn("google", { callbackUrl: "/" })}
+            >
+              Get Started
+            </Button>
+          )}
         </div>
       </div>
       <div className="text-center sm:hidden my-3 text-slate-400">

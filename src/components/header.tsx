@@ -25,20 +25,37 @@ export const Header = () => {
   return (
     <header className="fixed top-0  w-full z-[50] border-b bg-gray-950">
       <nav className="flex items-center justify-between py-2 px-6">
-        <div className="flex items-center justify-start gap-2 text-md font-bold">
+        <Link
+          href={"/"}
+          className="flex items-center justify-start gap-2 text-md font-bold"
+        >
           <Wallet />
           SafeCrypt SOL
-        </div>
+        </Link>
         {session?.data?.user ? (
-          <div className="flex items-center justify-center">
+          <div className="flex items-center justify-center gap-4">
+            <Link
+              href="/wallet"
+              className="flex items-center justify-center gap-2"
+            >
+              <Wallet />
+              Wallet
+            </Link>
             <DropdownMenu>
               <DropdownMenuTrigger className="relative" asChild>
-                <Avatar className="rounded-full cursor-pointer">
-                  <AvatarImage src={session?.data?.user?.image ?? ""} />
-                  <AvatarFallback>
-                    {session?.data?.user?.name?.[0]}
-                  </AvatarFallback>
-                </Avatar>
+                <div className="mx-auto flex w-full max-w-lg items-center justify-center">
+                  <div className="relative z-10 flex w-full items-center overflow-hidden rounded-full border border-slate-800 p-[2px]">
+                    <div className="animate-rotate absolute inset-0 h-full w-full rounded-full bg-[conic-gradient(#ff16b1_20deg,transparent_120deg)]"></div>
+                    <div className="relative z-20 flex w-full rounded-full bg-slate-900">
+                      <Avatar className="rounded-full cursor-pointer">
+                        <AvatarImage src={session?.data?.user?.image ?? ""} />
+                        <AvatarFallback>
+                          {session?.data?.user?.name?.[0]}
+                        </AvatarFallback>
+                      </Avatar>
+                    </div>
+                  </div>
+                </div>
               </DropdownMenuTrigger>
               <DropdownMenuContent className="absolute top-0 -right-5">
                 <DropdownMenuItem

@@ -47,6 +47,7 @@ model Wallet {
   id         String   @id @default(auto()) @map("_id") @db.ObjectId
   userId     String   @db.ObjectId
   mnemonics  String[]
+  seed       String
   publicKey  String
   privateKey String
   createdAt  DateTime @default(now())

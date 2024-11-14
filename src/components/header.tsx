@@ -25,13 +25,12 @@ export const Header = () => {
   return (
     <header className="fixed top-0  w-full z-[50] border-b bg-gray-950">
       <nav className="flex items-center justify-between py-2 px-6">
-        <Link
-          href={"/"}
+        <div
           className="flex items-center justify-start gap-2 text-md font-bold"
         >
           <Wallet />
           SafeCrypt SOL
-        </Link>
+        </div>
         {session?.data?.user ? (
           <div className="flex items-center justify-center gap-4">
             <Link

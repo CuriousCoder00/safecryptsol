@@ -9,9 +9,7 @@ export default function WalletLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  useEffect(() => {
-    createWallet();
-  });
+
   return (
     <div className="flex w-full h-full max-w-screen-2xl overflow-hidden min-h-screen px-2">
       <div className="flex items-center justify-center w-full gap-3 max-h-[calc(100vh-72px)] mt-[72px] pb-2">

@@ -1,5 +1,13 @@
 import React from "react";
 import { ScrollArea } from "../ui/scroll-area";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "../ui/dialog";
 
 export const Sidebar = () => {
   return (
@@ -19,22 +27,35 @@ export const SidebarItem = () => {
           </div>
         </div>
       </ScrollArea>
-      <div className="flex items-center justify-center h-12 w-12 rounded-full bg-slate-600 hover:bg-slate-800 transition-all duration-150 cursor-pointer aspect-square">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-8 w-8 text-white hover:scale-110 transition-transform duration-150"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-          />
-        </svg>
-      </div>
+      <Dialog>
+        <DialogTrigger>
+          <div className="flex items-center justify-center h-12 w-12 rounded-full bg-slate-600 hover:bg-slate-800 transition-all duration-150 cursor-pointer aspect-square">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-8 w-8 text-white hover:scale-110 transition-transform duration-150"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+              />
+            </svg>
+          </div>
+        </DialogTrigger>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Create Wallet</DialogTitle>
+            <DialogDescription>
+              Create a new wallet to start sending and receiving transactions.
+            </DialogDescription>
+          </DialogHeader>
+          create a new wallet
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };

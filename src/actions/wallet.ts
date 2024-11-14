@@ -20,15 +20,16 @@ export const createWallet = async () => {
     const pubKey = keypair.publicKey.toString();
     const privKey = bs58.encode(keypair.secretKey);
 
-    const wallet = await db.wallet.create({
-      data: {
-        privateKey: pubKey,
-        publicKey: privKey,
-        userId: user.id as string,
-        mnemonics: generateMnemonic(128).split(" "),
-      },
-    });
-    return wallet;
+    // const wallet = await db.wallet.create({
+    //   data: {
+    //     privateKey: pubKey,
+    //     publicKey: privKey,
+    //     userId: user.id as string,
+    //     mnemonics: generateMnemonic(128).split(" "),
+    //   },
+    // });
+    // return wallet;
+    console.log(pubKey, privKey);
   } catch (error) {
     return error;
   }

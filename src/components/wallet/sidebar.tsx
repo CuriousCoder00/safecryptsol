@@ -9,10 +9,11 @@ import {
   DialogTrigger,
 } from "../ui/dialog";
 import { CreateWallet } from "./create-wallet";
-import { getWallets } from "@/actions/wallet";
+import { createWallet, getWallets } from "@/actions/wallet";
 import { Wallet } from "@prisma/client";
 import { Skeleton } from "../ui/skeleton";
 import Link from "next/link";
+import { Button } from "../ui/button";
 
 export const Sidebar = () => {
   return (
@@ -61,11 +62,6 @@ export const SidebarItem = () => {
               <Skeleton className="w-10 h-10 rounded-full shadow-inner shadow-slate-600" />
               <Skeleton className="w-10 h-10 rounded-full shadow-inner shadow-slate-600" />
               <Skeleton className="w-10 h-10 rounded-full shadow-inner shadow-slate-600" />
-              <Skeleton className="w-10 h-10 rounded-full shadow-inner shadow-slate-600" />
-              <Skeleton className="w-10 h-10 rounded-full shadow-inner shadow-slate-600" />
-              <Skeleton className="w-10 h-10 rounded-full shadow-inner shadow-slate-600" />
-              <Skeleton className="w-10 h-10 rounded-full shadow-inner shadow-slate-600" />
-              <Skeleton className="w-10 h-10 rounded-full shadow-inner shadow-slate-600" />
             </div>
           )}
         </div>
@@ -96,7 +92,12 @@ export const SidebarItem = () => {
               Create a new wallet to start sending and receiving transactions.
             </DialogDescription>
           </DialogHeader>
-          <CreateWallet />
+          <div className="flex gap-2 w-full items-center justify-center">
+            <Button className="w-1/2" onClick={async () => createWallet()}>
+              Create Wallet
+            </Button>
+            <Button className="w-1/2">Import Wallet</Button>
+          </div>
         </DialogContent>
       </Dialog>
     </div>

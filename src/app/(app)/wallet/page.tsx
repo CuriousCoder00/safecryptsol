@@ -1,20 +1,16 @@
-import { getWallets } from "@/actions/wallet";
+import { createWallet, getWallets } from "@/actions/wallet";
 import { CreateWallet } from "@/components/wallet/create-wallet";
 import { Wallet } from "@/components/wallet/wallet";
 import { Wallet as WalletType } from "@prisma/client";
+import { Loader2 } from "lucide-react";
+import { redirect } from "next/navigation";
 
 const WalletPage = async () => {
   const wallets = (await getWallets()) as WalletType[];
-  if (wallets.length === 0) {
-    return (
-      <div>
-        Wallet not found. Please create a new wallet to start sending and
-        receiving transactions.
-      </div>
-    );
+  if (wallets.length < 1) {
+    return <CreateWallet />;
   }
-
-  return <Wallet wallets={wallets} />;
+  return redirect(`/wallet/${wallets[0].id}`);
 };
 
 export default WalletPage;

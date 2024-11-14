@@ -5,7 +5,6 @@ import { Wallet as WalletType } from "@prisma/client";
 
 const WalletPage = async () => {
   const wallets = (await getWallets()) as WalletType[];
-  console.log(wallets);
   if (wallets.length === 0) {
     return (
       <div>

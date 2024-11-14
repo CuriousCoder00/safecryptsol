@@ -43,7 +43,7 @@ export const SidebarItem = () => {
           {wallets.map((wallet, index) => (
             <Link
               href={`/wallet/${wallet.id}`}
-              className="w-10 h-10 rounded-full flex items-center justify-center bg-slate-600 hover:bg-slate-800 transition-all duration-150 cursor-pointer"
+              className="w-10 h-10 rounded-full flex items-center justify-center border shadow-inner shadow-slate-800 hover:bg-slate-800 transition-all duration-150 cursor-pointer"
               key={wallet.id}
             >
               A{index + 1}
@@ -51,15 +51,21 @@ export const SidebarItem = () => {
           ))}
           {loading && (
             <div className="flex flex-col items-start justify-start gap-2 h-full">
-              <Skeleton className="w-12 h-12 rounded-full shadow-inner shadow-slate-600" />
-              <Skeleton className="w-12 h-12 rounded-full shadow-inner shadow-slate-600" />
-              <Skeleton className="w-12 h-12 rounded-full shadow-inner shadow-slate-600" />
-              <Skeleton className="w-12 h-12 rounded-full shadow-inner shadow-slate-600" />
-              <Skeleton className="w-12 h-12 rounded-full shadow-inner shadow-slate-600" />
-              <Skeleton className="w-12 h-12 rounded-full shadow-inner shadow-slate-600" />
-              <Skeleton className="w-12 h-12 rounded-full shadow-inner shadow-slate-600" />
-              <Skeleton className="w-12 h-12 rounded-full shadow-inner shadow-slate-600" />
-              <Skeleton className="w-12 h-12 rounded-full shadow-inner shadow-slate-600" />
+              <Skeleton className="w-10 h-10 rounded-full shadow-inner shadow-slate-600" />
+              <Skeleton className="w-10 h-10 rounded-full shadow-inner shadow-slate-600" />
+              <Skeleton className="w-10 h-10 rounded-full shadow-inner shadow-slate-600" />
+              <Skeleton className="w-10 h-10 rounded-full shadow-inner shadow-slate-600" />
+              <Skeleton className="w-10 h-10 rounded-full shadow-inner shadow-slate-600" />
+              <Skeleton className="w-10 h-10 rounded-full shadow-inner shadow-slate-600" />
+              <Skeleton className="w-10 h-10 rounded-full shadow-inner shadow-slate-600" />
+              <Skeleton className="w-10 h-10 rounded-full shadow-inner shadow-slate-600" />
+              <Skeleton className="w-10 h-10 rounded-full shadow-inner shadow-slate-600" />
+              <Skeleton className="w-10 h-10 rounded-full shadow-inner shadow-slate-600" />
+              <Skeleton className="w-10 h-10 rounded-full shadow-inner shadow-slate-600" />
+              <Skeleton className="w-10 h-10 rounded-full shadow-inner shadow-slate-600" />
+              <Skeleton className="w-10 h-10 rounded-full shadow-inner shadow-slate-600" />
+              <Skeleton className="w-10 h-10 rounded-full shadow-inner shadow-slate-600" />
+              <Skeleton className="w-10 h-10 rounded-full shadow-inner shadow-slate-600" />
             </div>
           )}
         </div>

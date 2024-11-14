@@ -6,6 +6,7 @@ import { Keypair } from "@solana/web3.js";
 import bs58 from "bs58";
 import { derivePath } from "ed25519-hd-key";
 import nacl from "tweetnacl";
+import { Wallet as WalletType } from "@prisma/client";
 
 export const createWallet = async () => {
   const sessionData = await auth();
@@ -18,9 +19,13 @@ export const createWallet = async () => {
   }
 
   try {
-    const wallets = await getWallets();
+    const wallets = (await getWallets()) as WalletType[];
     let x = 0;
+    if (wallets.length > 0) {
+      x = wallets.length - 1;
+    }
     const path = `m/44'/501'/${x}'/0'`;
+    console.log(path);
     const mnemonics = generateMnemonic(128);
     const seed = mnemonicToSeedSync(mnemonics).toString("hex");
     const derivedSeed = derivePath(path, seed).key;
@@ -61,5 +66,5 @@ export const getWallets = async () => {
       userId: user.id as string,
     },
   });
-  return wallets;
+  return wallets as WalletType[];
 };

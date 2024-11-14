@@ -13,9 +13,9 @@ export default function WalletLayout({
       <div className="flex items-center justify-center w-full gap-3 max-h-[calc(100vh-72px)] mt-[72px] pb-2">
         <Sidebar />
         <div className="flex flex-col h-full w-full">
-          <div className="flex flex-col items-center justify-center border rounded-xl h-full w-full shadow-inner shadow-slate-600 p-2">
+          <div className="flex flex-col items-center justify-center border rounded-xl h-full w-full shadow-inner shadow-slate-600 p-2 gap-3">
             <WalletHeader />
-            <ScrollArea className="h-full p-2">{children}</ScrollArea>
+            <ScrollArea className="h-full w-full">{children}</ScrollArea>
           </div>
         </div>
       </div>

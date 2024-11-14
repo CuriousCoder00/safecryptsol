@@ -41,6 +41,7 @@ export const createWallet = async () => {
         privateKey: pubKey,
         publicKey: privKey,
         seed: seed,
+        name: `Wallet ${x + 1}`,
         mnemonics: mnemonics.split(" "),
         userId: user.id as string,
       },

@@ -1,5 +1,4 @@
 "use client";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import { WalletHeader } from "@/components/wallet/header";
 import { Sidebar } from "@/components/wallet/sidebar";
 

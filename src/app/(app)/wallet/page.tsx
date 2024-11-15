@@ -1,8 +1,6 @@
-import { createWallet, getWallets } from "@/actions/wallet";
+import { getWallets } from "@/actions/wallet";
 import { CreateWallet } from "@/components/wallet/create-wallet";
-import { Wallet } from "@/components/wallet/wallet";
 import { Wallet as WalletType } from "@prisma/client";
-import { Loader2 } from "lucide-react";
 import { redirect } from "next/navigation";
 
 const WalletPage = async () => {

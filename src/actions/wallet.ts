@@ -38,8 +38,8 @@ export const createWallet = async () => {
 
     const wallet = await db.wallet.create({
       data: {
-        privateKey: pubKey,
-        publicKey: privKey,
+        privateKey: privKey,
+        publicKey: pubKey,
         seed: seed,
         name: `Wallet ${x + 1}`,
         mnemonics: mnemonics.split(" "),

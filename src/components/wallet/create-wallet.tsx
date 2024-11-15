@@ -1,9 +1,8 @@
 "use client";
 import { createWallet } from "@/actions/wallet";
-import { Wallet as WalletType } from "@prisma/client";
 import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useEffect, useState, useTransition } from "react";
+import { useEffect, useTransition } from "react";
 
 export const CreateWallet = () => {
   const [isPending, startTransition] = useTransition();

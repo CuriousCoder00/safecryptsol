@@ -6,6 +6,7 @@ import { ArrowDown, ArrowLeftRight, ArrowUp, Copy } from "lucide-react";
 import { Receive } from "./receive";
 import { ScrollArea } from "../ui/scroll-area";
 import { Send } from "./send";
+import { Swap } from "./swap";
 
 type Props = {
   walletId: string;
@@ -36,7 +37,7 @@ export const Wallet = ({ walletId }: Props) => {
           >
             {wallet &&
               wallet?.publicKey.slice(0, 3) +
-                ".." +
+                "...." +
                 wallet?.publicKey.slice(
                   wallet.publicKey.length - 3,
                   wallet.publicKey.length - 1
@@ -98,13 +99,13 @@ export const Wallet = ({ walletId }: Props) => {
             ) : tab === "send" ? (
               <Send setTab={setTab} />
             ) : (
-              "Swap"
+              <Swap setTab={setTab} />
             )}
           </div>
         )}
         {tab === null && (
           <div className="flex flex-col gap-2 px-4 items-start justify-start w-full h-full shadow-inner shadow-slate-700 rounded-xl p-2 text-wrap flex-wrap max-lg:hidden">
-            <Receive setTab={setTab} pubKey={wallet?.publicKey as string} />
+            <Receive isTabNull={tab===null} setTab={setTab} pubKey={wallet?.publicKey as string} />
           </div>
         )}
         {tab !== null && (
@@ -114,7 +115,7 @@ export const Wallet = ({ walletId }: Props) => {
             ) : tab === "send" ? (
               <Send setTab={setTab} />
             ) : (
-              "Swap kar lo"
+              <Swap setTab={setTab} />
             )}
           </div>
         )}

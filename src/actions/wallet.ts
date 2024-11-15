@@ -66,6 +66,9 @@ export const getWallets = async () => {
     where: {
       userId: user.id as string,
     },
+    orderBy: {
+      createdAt: "desc",
+    },
   });
   return wallets as WalletType[];
 };

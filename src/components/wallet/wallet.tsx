@@ -4,6 +4,7 @@ import { Wallet as WalletType } from "@prisma/client";
 import { getWallet } from "@/actions/wallet";
 import { ArrowDown, ArrowLeftRight, ArrowUp, Copy } from "lucide-react";
 import { Receive } from "./receive";
+import { ScrollArea } from "../ui/scroll-area";
 
 type Props = {
   walletId: string;
@@ -81,19 +82,68 @@ export const Wallet = ({ walletId }: Props) => {
             <span className="text-sm text-slate-400">Swap</span>
           </div>
         </div>
+        <div className="flex flex-col items-start justify-start w-full">
+          <h2 className="font-semibold text-lg">Recent Transactions</h2>
+        </div>
+        <ScrollArea className="h-full w-full">
+          <div>T1</div>
+          <div>T1</div>
+          <div>T1</div>
+          <div>T1</div>
+          <div>T1</div>
+          <div>T1</div>
+          <div>T1</div>
+          <div>T1</div>
+          <div>T1</div>
+          <div>T1</div>
+          <div>T1</div>
+          <div>T1</div>
+          <div>T1</div>
+          <div>T1</div>
+          <div>T1</div>
+          <div>T1</div>
+          <div>T1</div>
+          <div>T1</div>
+          <div>T1</div>
+          <div>T1</div>
+          <div>T1</div>
+          <div>T1</div>
+          <div>T1</div>
+          <div>T1</div>
+          <div>T1</div>
+          <div>T1</div>
+          <div>T1</div>
+          <div>T1</div>
+          <div>T1</div>
+          <div>T1</div>
+          <div>T1</div>
+          <div>T1</div>
+          <div>T1</div>
+          <div>T1</div>
+          <div>T1</div>
+          <div>T1</div>
+          <div>T1</div>
+          <div>T1</div>
+          <div>T1</div>
+          <div>T1</div>
+          <div>T1</div>
+          <div>T1</div>
+        </ScrollArea>
       </div>
-      {tab !== null && (
-        <div className="flex flex-col gap-2 px-4 items-start justify-start lg:w-2/3 w-full h-full shadow-inner shadow-slate-700 rounded-xl p-2 text-wrap flex-wrap max-md:absolute">
-          {tab === "receive" && (
+      <ScrollArea className="h-full lg:w-2/3 w-full">
+        {tab !== null && (
+          <div className="flex flex-col gap-2 px-4 items-start justify-start w-full h-full shadow-inner shadow-slate-700 rounded-xl p-2 text-wrap flex-wrap max-md:absolute">
+            {tab === "receive" && (
+              <Receive setTab={setTab} pubKey={wallet?.publicKey as string} />
+            )}
+          </div>
+        )}
+        {tab === null && (
+          <div className="flex flex-col gap-2 px-4 items-start justify-start w-full h-full shadow-inner shadow-slate-700 rounded-xl p-2 text-wrap flex-wrap max-md:hidden max-md:absolute">
             <Receive setTab={setTab} pubKey={wallet?.publicKey as string} />
-          )}
-        </div>
-      )}
-      {tab === null && (
-        <div className="flex flex-col gap-2 px-4 items-start justify-start lg:w-2/3 w-full h-full shadow-inner shadow-slate-700 rounded-xl p-2 text-wrap flex-wrap max-md:hidden max-md:absolute">
-          <Receive setTab={setTab} pubKey={wallet?.publicKey as string} />
-        </div>
-      )}
+          </div>
+        )}
+      </ScrollArea>
     </div>
   );
 };

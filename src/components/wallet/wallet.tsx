@@ -3,12 +3,14 @@ import { Button } from "../ui/button";
 import { Wallet as WalletType } from "@prisma/client";
 import { getWallet } from "@/actions/wallet";
 import { ArrowDown, ArrowLeftRight, ArrowUp, Copy } from "lucide-react";
+import { Receive } from "./receive";
 
 type Props = {
   walletId: string;
 };
 export const Wallet = ({ walletId }: Props) => {
   const [wallet, setWallet] = useState<WalletType>();
+  const [tab, setTab] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
   const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text);
@@ -30,11 +32,13 @@ export const Wallet = ({ walletId }: Props) => {
             className="flex items-center justify-center gap-2"
             onClick={() => copyToClipboard(wallet?.publicKey as string)}
           >
-            {wallet?.publicKey.slice(0, 3)}..
-            {wallet?.publicKey.slice(
-              wallet.publicKey.length - 3,
-              wallet.publicKey.length - 1
-            )}
+            {wallet &&
+              wallet?.publicKey.slice(0, 3) +
+                ".." +
+                wallet?.publicKey.slice(
+                  wallet.publicKey.length - 3,
+                  wallet.publicKey.length - 1
+                )}
             <Copy size={13} />
           </Button>
         </div>
@@ -52,6 +56,7 @@ export const Wallet = ({ walletId }: Props) => {
             <Button
               variant={"outline"}
               className="rounded-full text-sky-600 h-12 w-12 text-xl p-0"
+              onClick={() => setTab("receive")}
             >
               <ArrowDown size={20} />
             </Button>
@@ -77,9 +82,18 @@ export const Wallet = ({ walletId }: Props) => {
           </div>
         </div>
       </div>
-      <div className="flex flex-col gap-2 px-4 items-start justify-start lg:w-2/3 w-full h-full shadow-inner shadow-slate-700 rounded-xl p-2 text-wrap flex-wrap max-md:absolute">
-      
-      </div>
+      {tab !== null && (
+        <div className="flex flex-col gap-2 px-4 items-start justify-start lg:w-2/3 w-full h-full shadow-inner shadow-slate-700 rounded-xl p-2 text-wrap flex-wrap max-md:absolute">
+          {tab === "receive" && (
+            <Receive setTab={setTab} pubKey={wallet?.publicKey as string} />
+          )}
+        </div>
+      )}
+      {tab === null && (
+        <div className="flex flex-col gap-2 px-4 items-start justify-start lg:w-2/3 w-full h-full shadow-inner shadow-slate-700 rounded-xl p-2 text-wrap flex-wrap max-md:hidden max-md:absolute">
+          <Receive setTab={setTab} pubKey={wallet?.publicKey as string} />
+        </div>
+      )}
     </div>
   );
 };

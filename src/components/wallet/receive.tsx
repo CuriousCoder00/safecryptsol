@@ -1,6 +1,7 @@
 import { AlertCircle, ArrowLeft, Copy } from "lucide-react";
 import QRCode from "react-qr-code";
 import { Button } from "../ui/button";
+import { Skeleton } from "../ui/skeleton";
 type Props = {
   isTabNull?: boolean;
   pubKey: string;
@@ -8,6 +9,9 @@ type Props = {
 };
 
 export const Receive = ({ isTabNull, pubKey, setTab }: Props) => {
+  if (pubKey === undefined || pubKey === null) {
+    return <ReceiveLoader />;
+  }
   return (
     <div className="relative flex flex-col items-center justify-start h-full w-full gap-3 bg-black">
       {!isTabNull && (
@@ -21,7 +25,7 @@ export const Receive = ({ isTabNull, pubKey, setTab }: Props) => {
         </Button>
       )}
       <h1 className="text-2xl font-bold mt-12">Your Wallet Address</h1>
-      <p className="w-[300px]">
+      <p className=" md:w-[400px] w-[300px] text-center">
         You can deposit crypto or NFTs into your account via this Solana wallet
         address:
       </p>
@@ -42,8 +46,24 @@ export const Receive = ({ isTabNull, pubKey, setTab }: Props) => {
       </div>
       <div className="flex w-full items-center justify-center gap-2">
         <AlertCircle size={18} /> Only send crypto to this address via Solana
-        network
+        Network
       </div>
+    </div>
+  );
+};
+
+export const ReceiveLoader = () => {
+  return (
+    <div className="relative flex flex-col items-center justify-start h-full w-full gap-3 bg-black">
+      <Skeleton className="absolute top-2 left-2 w-40 h-10 rounded-lg" />
+      <Skeleton className="w-40 h-8 rounded-lg mt-12" />
+      <Skeleton className="md:w-[400px] w-[300px] h-10" />
+      <Skeleton className="w-[200px] h-[200px]" />
+      <div className="flex items-center border rounded justify-between md:w-2/3 w-full gap-4 py-2 px-4">
+        <Skeleton className="flex items-center justify-center w-full h-8" />
+        <Skeleton className="rounded-full w-10 h-10 p-0" />
+      </div>
+      <Skeleton className="flex w-full" />
     </div>
   );
 };

@@ -1,14 +1,20 @@
-import { getWallets } from "@/actions/wallet";
+import { getWalletsOfAAccount } from "@/actions/wallet";
 import { CreateWallet } from "@/components/wallet/create-wallet";
-import { Wallet as WalletType } from "@prisma/client";
+import db from "@/lib/db";
 import { redirect } from "next/navigation";
 
 const WalletPage = async () => {
-  const wallets = (await getWallets()) as WalletType[];
-  if (wallets.length < 1) {
+  const account = await db.aC.findFirst();
+  if (!account) {
     return <CreateWallet />;
   }
-  return redirect(`/wallet/${wallets[0].id}`);
+  const wallets = await getWalletsOfAAccount({
+    accountId: account?.id as string,
+  });
+  if (wallets && wallets.wallets && wallets.wallets.length > 0) {
+    return redirect(`/wallet/${account.id}/${wallets.wallets[0].id}`);
+  }
+  return <CreateWallet />;
 };
 
 export default WalletPage;

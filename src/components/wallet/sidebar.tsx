@@ -8,12 +8,14 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "../ui/dialog";
-import { CreateWallet } from "./create-wallet";
-import { createWallet, getWallets } from "@/actions/wallet";
-import { Wallet } from "@prisma/client";
+import {
+  createWallet,
+  getAccounts,
+} from "@/actions/wallet";
 import { Skeleton } from "../ui/skeleton";
 import Link from "next/link";
 import { Button } from "../ui/button";
+import { usePathname } from "next/navigation";
 
 export const Sidebar = () => {
   return (
@@ -24,28 +26,35 @@ export const Sidebar = () => {
 };
 
 export const SidebarItem = () => {
-  const [wallets, setWallets] = React.useState<Wallet[]>([]);
+  const [accounts, setAccounts] = React.useState<any[]>([]);
   const [loading, setLoading] = React.useState<Boolean>(false);
-  const fetchWallets = async () => {
+
+  const path = usePathname();
+  const accountId = path.split("/")[2] as string;
+
+  const fetchAccounts = async () => {
     setLoading(true);
-    const wallets = (await getWallets()) as Wallet[];
-    if (wallets.length > 0) {
-      setWallets(wallets);
+    const res = await getAccounts();
+    if (res.status === false) {
+      console.log(res.error);
+    }
+    if (res.accounts) {
+      setAccounts(res.accounts);
       setLoading(false);
     }
   };
   React.useEffect(() => {
-    fetchWallets();
+    fetchAccounts();
   }, []);
   return (
     <div className="border rounded-xl h-full w-full shadow-inner shadow-slate-600 relative flex flex-col items-center justify-between py-2">
       <ScrollArea className="h-full p-2 flex flex-col gap-5">
         <div className="flex flex-col items-start justify-start gap-2 h-full">
-          {wallets.map((wallet, index) => (
+          {accounts.map((account, index) => (
             <Link
-              href={`/wallet/${wallet.id}`}
+              href={`/wallet/${account.id}/${account.wallets[0].id}`}
               className="w-10 h-10 rounded-full flex items-center justify-center border shadow-inner shadow-slate-800 hover:bg-slate-800 transition-all duration-150 cursor-pointer"
-              key={wallet.id}
+              key={account.id}
             >
               A{index + 1}
             </Link>
@@ -93,7 +102,10 @@ export const SidebarItem = () => {
             </DialogDescription>
           </DialogHeader>
           <div className="flex gap-2 w-full items-center justify-center">
-            <Button className="w-1/2" onClick={async () => createWallet()}>
+            <Button
+              className="w-1/2"
+              onClick={async () => createWallet({ accountId })}
+            >
               Create Wallet
             </Button>
             <Button className="w-1/2">Import Wallet</Button>

@@ -7,6 +7,7 @@ export default function WalletLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
   return (
     <div className="flex w-full h-full max-w-screen-2xl overflow-hidden min-h-screen px-2">
       <div className="flex items-center justify-center w-full gap-3 max-h-[calc(100vh-72px)] mt-[72px] pb-2">
@@ -14,7 +15,9 @@ export default function WalletLayout({
         <div className="flex flex-col h-full w-full">
           <div className="flex flex-col items-center justify-center border rounded-xl h-full w-full max-h-[calc(100vh-72px)] shadow-inner shadow-slate-600 p-2 gap-3">
             <WalletHeader />
-            <div className="flex h-full w-full max-h-[calc(100vh-150px)]">{children}</div>
+            <div className="flex h-full w-full max-h-[calc(100vh-150px)]">
+              {children}
+            </div>
           </div>
         </div>
       </div>

@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 
 const WalletPage = () => {
   const path = usePathname();
-  const walletId = path.split("/")[2];
+  const walletId = path.split("/")[3];
   return <Wallet walletId={walletId} />;
 };
 

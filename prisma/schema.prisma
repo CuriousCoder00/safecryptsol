@@ -16,9 +16,10 @@ model User {
   image         String?
   accounts      Account[]
   emailVerified DateTime?
+  isUserNew     Boolean?   @default(true)
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
-  Wallet        Wallet[]
+  AC            AC[]
 }
 
 model Account {
@@ -43,16 +44,37 @@ model Account {
   @@unique([provider, providerAccountId])
 }
 
-model Wallet {
-  id         String   @id @default(auto()) @map("_id") @db.ObjectId
-  userId     String   @db.ObjectId
-  name       String
-  mnemonics  String[]
-  seed       String
-  publicKey  String
-  privateKey String
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+model AC {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId    String   @db.ObjectId
+  name      String
+  mnemonics String[]
+  seed      String
+
+  acN       Int      @unique
+
+  wallets   Wallet[]
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Wallet {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  acId String? @db.ObjectId
+  name String
+
+  publicKey  String
+  privateKey String
+
+  balance  Float?
+  currency String?
+
+  ac AC? @relation(fields: [acId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

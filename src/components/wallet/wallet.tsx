@@ -1,8 +1,6 @@
 import { useEffect, useState, useTransition } from "react";
-import { Button } from "../ui/button";
 import { Wallet as WalletType } from "@prisma/client";
 import { getWallet } from "@/actions/wallet";
-import { ArrowDown, ArrowLeftRight, ArrowUp, Copy } from "lucide-react";
 import { Receive } from "./receive";
 import { ScrollArea } from "../ui/scroll-area";
 import { Send } from "./send";
@@ -18,8 +16,12 @@ export const Wallet = ({ walletId }: Props) => {
   const [isPending, startTransition] = useTransition();
   useEffect(() => {
     startTransition(() => {
-      getWallet(walletId).then((res) => {
-        setWallet(res as WalletType);
+      getWallet({ walletId }).then((res) => {
+        if (res.status === true) {
+          if (res.wallet) {
+            setWallet(res.wallet);
+          }
+        }
       });
     });
   }, []);

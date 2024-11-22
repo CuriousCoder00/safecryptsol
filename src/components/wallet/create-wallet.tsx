@@ -1,5 +1,5 @@
 "use client";
-import { createWallet } from "@/actions/wallet";
+import { createNewWallet } from "@/actions/onboarding";
 import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useTransition } from "react";
@@ -9,8 +9,8 @@ export const CreateWallet = () => {
   const router = useRouter();
   useEffect(() => {
     startTransition(() => {
-      createWallet().then((res) => {
-        router.push(`/wallet/${res?.wallet?.id as string}`);
+      createNewWallet().then((res) => {
+        router.push(`/wallet/${res.account?.id}/${res.wallet?.id}`);
       });
     });
   }, []);

@@ -8,14 +8,12 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "../ui/dialog";
-import {
-  createWallet,
-  getAccounts,
-} from "@/actions/wallet";
+import { getAccounts } from "@/actions/wallet";
 import { Skeleton } from "../ui/skeleton";
 import Link from "next/link";
 import { Button } from "../ui/button";
 import { usePathname } from "next/navigation";
+import { createNewWallet } from "@/actions/onboarding";
 
 export const Sidebar = () => {
   return (
@@ -94,7 +92,7 @@ export const SidebarItem = () => {
             </svg>
           </div>
         </DialogTrigger>
-        <DialogContent>
+        <DialogContent className="z-[999]">
           <DialogHeader>
             <DialogTitle>Create Wallet</DialogTitle>
             <DialogDescription>
@@ -102,11 +100,8 @@ export const SidebarItem = () => {
             </DialogDescription>
           </DialogHeader>
           <div className="flex gap-2 w-full items-center justify-center">
-            <Button
-              className="w-1/2"
-              onClick={async () => createWallet({ accountId })}
-            >
-              Create Wallet
+            <Button className="w-1/2" onClick={() => createNewWallet()}>
+              Add new Wallet
             </Button>
             <Button className="w-1/2">Import Wallet</Button>
           </div>

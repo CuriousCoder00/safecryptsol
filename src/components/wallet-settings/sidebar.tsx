@@ -1,7 +1,5 @@
 import React from "react";
 import { ScrollArea } from "../ui/scroll-area";
-
-import { Wallet } from "@prisma/client";
 import Link from "next/link";
 
 export const Sidebar = ({ walletId }: { walletId: string }) => {
@@ -13,19 +11,6 @@ export const Sidebar = ({ walletId }: { walletId: string }) => {
 };
 
 export const SidebarItem = ({ walletId }: { walletId: string }) => {
-  const [wallets, setWallets] = React.useState<Wallet[]>([]);
-  const [loading, setLoading] = React.useState<Boolean>(false);
-  // const fetchWallets = async () => {
-  //   setLoading(true);
-  //   const wallets = (await getWallets()) as Wallet[];
-  //   if (wallets.length > 0) {
-  //     setWallets(wallets);
-  //     setLoading(false);
-  //   }
-  // };
-  // React.useEffect(() => {
-  //   fetchWallets();
-  // }, []);
   return (
     <div className="border-r h-full w-full shadow-slate-600 relative flex flex-col items-start justify-start py-2">
       <ScrollArea className="h-full flex flex-col items-start justify-start gap-2 w-full">

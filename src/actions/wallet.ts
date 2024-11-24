@@ -7,7 +7,7 @@ import { derivePath } from "ed25519-hd-key";
 import nacl from "tweetnacl";
 import { useServerSession } from "@/hook/use-server-session";
 
-export const createNewAccount = async () => {
+export const CreateNewAccount = async () => {
   const { user } = await useServerSession();
   if (!user) {
     return { status: false, error: "User not found", code: 404 };
@@ -23,7 +23,7 @@ export const createNewAccount = async () => {
         userId: user.id,
       },
     });
-    let acN = accounts.length;
+    const acN = accounts.length;
     await db.aC.create({
       data: {
         userId: user.id,
@@ -33,16 +33,16 @@ export const createNewAccount = async () => {
         acN: acN,
       },
     });
-  } catch (error: any) {
+  } catch (error: unknown) {
     return {
       status: false,
-      error: error.message || "Internal Server Error",
+      error: (error as Error)?.message || "Internal Server Error",
       code: 500,
     };
   }
 };
 
-export const getWalletsOfAAccount = async ({
+export const GetWalletsOfAAccount = async ({
   accountId,
 }: {
   accountId: string;
@@ -61,12 +61,12 @@ export const getWalletsOfAAccount = async ({
       },
     });
     return { status: true, wallets: wallets, code: 200 };
-  } catch (error: any) {
-    return { status: false, error: error.message, code: 500 };
+  } catch (error: unknown) {
+    return { status: false, error: (error as Error).message, code: 500 };
   }
 };
 
-export const createWallet = async ({ accountId }: { accountId: string }) => {
+export const CreateWallet = async ({ accountId }: { accountId: string }) => {
   const { user } = await useServerSession();
   if (!user) {
     return { status: false, error: "User not found", code: 404 };
@@ -84,7 +84,7 @@ export const createWallet = async ({ accountId }: { accountId: string }) => {
   if (!account) return { status: false, error: "Account not found", code: 404 };
 
   try {
-    const { wallets } = await getWalletsOfAAccount({ accountId: accountId });
+    const { wallets } = await GetWalletsOfAAccount({ accountId: accountId });
     if (!wallets) {
       return { status: false, error: "Wallets not found", code: 404 };
     }
@@ -95,7 +95,7 @@ export const createWallet = async ({ accountId }: { accountId: string }) => {
         code: 400,
       };
     }
-    let x = wallets.length;
+    const x = wallets.length;
 
     const path = `m/44'/501'/${account.acN}'/${x}'`;
 
@@ -117,12 +117,12 @@ export const createWallet = async ({ accountId }: { accountId: string }) => {
       },
     });
     return { status: true, wallet: wallet, code: 200 };
-  } catch (error: any) {
-    return { status: false, error: error.message, code: 500 };
+  } catch (error: unknown) {
+    return { status: false, error: (error as Error).message, code: 500 };
   }
 };
 
-export const getAccounts = async () => {
+export const GetAccounts = async () => {
   const { user } = await useServerSession();
   if (!user) {
     return { status: false, error: "User not found", code: 404 };
@@ -150,12 +150,12 @@ export const getAccounts = async () => {
       },
     });
     return { status: true, accounts: accounts, code: 200 };
-  } catch (error: any) {
-    return { status: false, error: error.message, code: 500 };
+  } catch (error: unknown) {
+    return { status: false, error: (error as Error).message, code: 500 };
   }
 };
 
-export const getWallet = async ({ walletId }: { walletId: string }) => {
+export const GetWallet = async ({ walletId }: { walletId: string }) => {
   const { user } = await useServerSession();
   if (!user) {
     return { status: false, error: "User not found", code: 404 };
@@ -170,12 +170,12 @@ export const getWallet = async ({ walletId }: { walletId: string }) => {
       },
     });
     return { status: true, wallet: wallet, code: 200 };
-  } catch (error: any) {
-    return { status: false, error: error.message, code: 500 };
+  } catch (error: unknown) {
+    return { status: false, error: (error as Error).message, code: 500 };
   }
 };
 
-export const getAccountById = async ({ accountId }: { accountId: string }) => {
+export const GetAccountById = async ({ accountId }: { accountId: string }) => {
   const { user } = await useServerSession();
   if (!user) {
     return { status: false, error: "User not found", code: 404 };
@@ -190,7 +190,7 @@ export const getAccountById = async ({ accountId }: { accountId: string }) => {
       },
     });
     return { status: true, account: account, code: 200 };
-  } catch (error: any) {
-    return { status: false, error: error.message, code: 500 };
+  } catch (error: unknown) {
+    return { status: false, error: (error as Error).message, code: 500 };
   }
 };

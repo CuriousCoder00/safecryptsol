@@ -1,6 +1,6 @@
 import React from "react";
 
-import { getWalletsOfAAccount } from "@/actions/wallet";
+import { GetWalletsOfAAccount } from "@/actions/wallet";
 import { Wallet } from "@prisma/client";
 import { usePathname } from "next/navigation";
 import { Button } from "../ui/button";
@@ -19,7 +19,7 @@ const SelectWallet = ({ accountId }: { accountId: string }) => {
   const walletId = path.split("/")[3];
   const [wallets, setWallets] = React.useState<Wallet[]>([]);
   const getWallets = async () => {
-    const { status, wallets } = await getWalletsOfAAccount({
+    const { status, wallets } = await GetWalletsOfAAccount({
       accountId: accountId,
     });
     if (status === false) {

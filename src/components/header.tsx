@@ -9,16 +9,9 @@ import {
 } from "./ui/dropdown-menu";
 
 import { Button } from "./ui/button";
-import { MenuIcon, Wallet } from "lucide-react";
+import { Wallet } from "lucide-react";
 import Link from "next/link";
-import {
-  Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "./ui/sheet";
+
 
 export const Header = () => {
   const session = useSession();

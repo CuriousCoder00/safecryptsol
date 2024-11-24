@@ -1,8 +1,7 @@
-import NextAuth, { Session, User } from "next-auth";
+import NextAuth from "next-auth";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import Google from "next-auth/providers/google";
 import db from "./db";
-import { getUserById } from "./data";
 
 declare module "next-auth" {
   interface Session {

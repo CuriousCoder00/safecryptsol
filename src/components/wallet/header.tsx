@@ -3,14 +3,14 @@ import { Plus, Settings } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
 import { Wallet as WalletType } from "@prisma/client";
 import { useEffect, useState, useTransition } from "react";
-import { createWallet, getWallet } from "@/actions/wallet";
+import { CreateWallet, GetWallet } from "@/actions/wallet";
 import Link from "next/link";
 import { Skeleton } from "../ui/skeleton";
 import { Button } from "../ui/button";
 import SelectWallet from "./select-wallet";
 
-type Props = {};
-export const WalletHeader = ({}: Props) => {
+
+export const WalletHeader = () => {
   const path = usePathname();
   const router = useRouter();
   const accountId = path.split("/")[2] as string;
@@ -20,7 +20,7 @@ export const WalletHeader = ({}: Props) => {
 
   useEffect(() => {
     startTransition(() => {
-      getWallet({ walletId }).then((res) => {
+      GetWallet({ walletId }).then((res) => {
         if (res.status === true) {
           if (res.wallet) {
             setWallet(res.wallet);
@@ -32,7 +32,7 @@ export const WalletHeader = ({}: Props) => {
 
   const createNewWallet = async () => {
     startTransition(() => {
-      createWallet({ accountId }).then((res) => {
+      CreateWallet({ accountId }).then((res) => {
         if (res.status === true) {
           setWallet(res.wallet);
           router.push(`/wallet/${accountId}/${res.wallet?.id}`);

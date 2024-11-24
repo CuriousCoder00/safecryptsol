@@ -8,12 +8,12 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "../ui/dialog";
-import { getAccounts } from "@/actions/wallet";
+import { GetAccounts } from "@/actions/wallet";
 import { Skeleton } from "../ui/skeleton";
 import Link from "next/link";
 import { Button } from "../ui/button";
 import { usePathname } from "next/navigation";
-import { createNewWallet } from "@/actions/onboarding";
+import { CreateNewWallet } from "@/actions/onboarding";
 
 export const Sidebar = () => {
   return (
@@ -25,14 +25,12 @@ export const Sidebar = () => {
 
 export const SidebarItem = () => {
   const [accounts, setAccounts] = React.useState<any[]>([]);
-  const [loading, setLoading] = React.useState<Boolean>(false);
+  const [loading, setLoading] = React.useState<boolean>(false);
 
   const path = usePathname();
-  const accountId = path.split("/")[2] as string;
-
   const fetchAccounts = async () => {
     setLoading(true);
-    const res = await getAccounts();
+    const res = await GetAccounts();
     if (res.status === false) {
       console.log(res.error);
     }
@@ -100,7 +98,7 @@ export const SidebarItem = () => {
             </DialogDescription>
           </DialogHeader>
           <div className="flex gap-2 w-full items-center justify-center">
-            <Button className="w-1/2" onClick={() => createNewWallet()}>
+            <Button className="w-1/2" onClick={() => CreateNewWallet()}>
               Add new Wallet
             </Button>
             <Button className="w-1/2">Import Wallet</Button>

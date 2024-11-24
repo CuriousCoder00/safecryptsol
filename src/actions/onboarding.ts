@@ -2,11 +2,11 @@
 
 import { useServerSession } from "@/hook/use-server-session";
 
-import { createWallet } from "@/actions/wallet";
+import { CreateWallet } from "@/actions/wallet";
 import { generateMnemonic, mnemonicToSeedSync } from "bip39";
 import db from "@/lib/db";
 
-export const createNewWallet = async () => {
+export const CreateNewWallet = async () => {
   const { user } = await useServerSession();
   if (!user) {
     return { status: false, error: "User not found", code: 404 };
@@ -22,7 +22,7 @@ export const createNewWallet = async () => {
         userId: user.id,
       },
     });
-    let acN = accounts.length;
+    const acN = accounts.length;
     const account = await db.aC.create({
       data: {
         userId: user.id,
@@ -32,12 +32,12 @@ export const createNewWallet = async () => {
         acN: acN,
       },
     });
-    const { wallet } = await createWallet({ accountId: account.id });
+    const { wallet } = await CreateWallet({ accountId: account.id });
     return { status: true, account: account, wallet: wallet, code: 200 };
-  } catch (error: any) {
+  } catch (error: unknown) {
     return {
       status: false,
-      error: error.message || "Internal Server Error",
+      error: (error as Error)?.message || "Internal Server Error",
       code: 500,
     };
   }

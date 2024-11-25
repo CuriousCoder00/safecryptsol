@@ -73,6 +73,11 @@ export const WalletHeader = () => {
           <Skeleton className="w-40 h-full" />
         )}
       </div>
+      {isPending && (
+        <div className="fixed inset-0 flex items-center justify-center w-full h-full z-[99999] bg-black bg-opacity-50">
+          <Loader2 className="animate-spin" />
+        </div>
+      )}
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import { FindFirstWallet, GetWalletsOfAAccount } from "@/actions/wallet";
+import { FindFirstWallet } from "@/actions/wallet";
 import { CreateWallet } from "@/components/wallet/create-wallet";
 import { redirect } from "next/navigation";
 

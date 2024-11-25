@@ -7,7 +7,6 @@ export default function WalletSettingsLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const path = usePathname();
   return (
     <div className="flex w-full h-full px-2 overflow-hidden">
       <div className="flex items-center justify-center w-full max-h-[calc(100vh-142px)] gap-2">

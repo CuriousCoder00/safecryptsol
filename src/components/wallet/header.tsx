@@ -1,5 +1,5 @@
 "use client";
-import { Plus, Settings } from "lucide-react";
+import { Loader2, Plus, Settings } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
 import { Wallet as WalletType } from "@prisma/client";
 import { useEffect, useState, useTransition } from "react";
@@ -8,7 +8,6 @@ import Link from "next/link";
 import { Skeleton } from "../ui/skeleton";
 import { Button } from "../ui/button";
 import SelectWallet from "./select-wallet";
-
 
 export const WalletHeader = () => {
   const path = usePathname();
@@ -74,6 +73,17 @@ export const WalletHeader = () => {
           <Skeleton className="w-40 h-full" />
         )}
       </div>
+      {isPending && (
+        <div className="absolute inset-0 bg-black bg-opacity-50 z-[999999] flex items-center justify-center">
+          <div className="flex flex-col items-center justify-center mt-12 shadow-inner shadow-slate-700 rounded-xl border p-2 gap-3 px-4">
+            <div className="flex items-center justify-center gap-2">
+              <Loader2 className="animate-spin" />
+              Creating a wallet...
+            </div>
+            <div className="flex">Please wait while we create your wallet.</div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

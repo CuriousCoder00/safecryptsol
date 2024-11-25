@@ -28,6 +28,11 @@ export const Wallet = ({ walletId }: Props) => {
   }, []);
   return (
     <div className="flex items-start justify-start h-full w-full gap-2 relative">
+      {!isPending && !wallet && (
+        <div className="fixed inset-0 flex items-center justify-center w-full h-full z-[99999]">
+          <Loader2 className="animate-spin" />
+        </div>
+      )}
       <WalletMenu setTab={setTab} wallet={wallet as WalletType} />
       <ScrollArea className="h-full lg:w-2/3 w-full">
         {tab !== null && (
@@ -59,17 +64,6 @@ export const Wallet = ({ walletId }: Props) => {
             ) : (
               <Swap setTab={setTab} />
             )}
-          </div>
-        )}
-        {isPending && (
-          <div className="absolute inset-0 bg-black bg-opacity-50 z-[999999] flex items-center justify-center">
-            <div className="flex flex-col items-center justify-center mt-12 shadow-inner shadow-slate-700 rounded-xl border p-2 gap-3 px-4">
-              <div className="flex items-center justify-center gap-2">
-                <Loader2 className="animate-spin" />
-                Loading...
-              </div>
-              <div className="flex">Please wait while we load your wallet.</div>
-            </div>
           </div>
         )}
       </ScrollArea>

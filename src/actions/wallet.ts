@@ -57,6 +57,7 @@ export const GetWalletsOfAAccount = async ({
   try {
     const wallets = await db.wallet.findMany({
       where: {
+        userId: user.id,
         acId: accountId,
       },
     });
@@ -114,6 +115,7 @@ export const CreateWallet = async ({ accountId }: { accountId: string }) => {
         publicKey: pubKey,
         name: `Wallet ${x + 1}`,
         acId: accountId,
+        userId: user.id,
       },
     });
     return { status: true, wallet: wallet, code: 200 };
@@ -190,6 +192,35 @@ export const GetAccountById = async ({ accountId }: { accountId: string }) => {
       },
     });
     return { status: true, account: account, code: 200 };
+  } catch (error: unknown) {
+    return { status: false, error: (error as Error).message, code: 500 };
+  }
+};
+
+export const FindFirstWallet = async () => {
+  const { user } = await getServerSession();
+  if (!user) {
+    return { status: false, error: "User not found", code: 404 };
+  }
+  if (!user.id) {
+    return { status: false, error: "User ID not found", code: 404 };
+  }
+  try {
+    const account = await db.aC.findFirst({
+      where: {
+        userId: user.id,
+      },
+    });
+    if (!account) {
+      return { status: false, error: "Account not found", code: 404 };
+    }
+    const wallet = await db.wallet.findFirst({
+      where: {
+        userId: user.id,
+        acId: account.id,
+      },
+    });
+    return { status: true, account: account, wallet: wallet, code: 200 };
   } catch (error: unknown) {
     return { status: false, error: (error as Error).message, code: 500 };
   }

@@ -16,10 +16,11 @@ model User {
   image         String?
   accounts      Account[]
   emailVerified DateTime?
-  isUserNew     Boolean?   @default(true)
+  isUserNew     Boolean?  @default(true)
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
   AC            AC[]
+  wallets       Wallet[]
 }
 
 model Account {
@@ -51,10 +52,10 @@ model AC {
   mnemonics String[]
   seed      String
 
-  acN       Int      @unique
+  acN Int @unique
 
-  wallets   Wallet[]
-  
+  wallets Wallet[]
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -64,8 +65,9 @@ model AC {
 model Wallet {
   id String @id @default(auto()) @map("_id") @db.ObjectId
 
-  acId String? @db.ObjectId
-  name String
+  acId   String? @unique @map("_acId") @db.ObjectId
+  userId String? @map("_userId") @db.ObjectId
+  name   String
 
   publicKey  String
   privateKey String
@@ -73,7 +75,8 @@ model Wallet {
   balance  Float?
   currency String?
 
-  ac AC? @relation(fields: [acId], references: [id], onDelete: Cascade)
+  ac   AC?   @relation(fields: [acId], references: [id], onDelete: Cascade)
+  user User? @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

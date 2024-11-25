@@ -73,17 +73,6 @@ export const WalletHeader = () => {
           <Skeleton className="w-40 h-full" />
         )}
       </div>
-      {isPending && (
-        <div className="absolute inset-0 bg-black bg-opacity-50 z-[999999] flex items-center justify-center">
-          <div className="flex flex-col items-center justify-center mt-12 shadow-inner shadow-slate-700 rounded-xl border p-2 gap-3 px-4">
-            <div className="flex items-center justify-center gap-2">
-              <Loader2 className="animate-spin" />
-              Creating a wallet...
-            </div>
-            <div className="flex">Please wait while we create your wallet.</div>
-          </div>
-        </div>
-      )}
     </div>
   );
 };

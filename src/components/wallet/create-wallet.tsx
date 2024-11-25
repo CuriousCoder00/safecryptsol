@@ -8,6 +8,7 @@ export const CreateWallet = () => {
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
   useEffect(() => {
+    console.log("Creating a wallet...");
     startTransition(() => {
       CreateNewWallet().then((res) => {
         router.push(`/wallet/${res.account?.id}/${res.wallet?.id}`);

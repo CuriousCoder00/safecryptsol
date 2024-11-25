@@ -13,6 +13,7 @@ import { Skeleton } from "../ui/skeleton";
 import Link from "next/link";
 import { Button } from "../ui/button";
 import { CreateNewWallet } from "@/actions/onboarding";
+import { useRouter } from "next/navigation";
 
 export const Sidebar = () => {
   return (
@@ -25,16 +26,28 @@ export const Sidebar = () => {
 export const SidebarItem = () => {
   const [accounts, setAccounts] = React.useState<any[]>([]);
   const [loading, setLoading] = React.useState<boolean>(false);
-
+  const [loading2, setLoading2] = React.useState<boolean>(false);
+  const router = useRouter();
   const fetchAccounts = async () => {
     setLoading(true);
     const res = await GetAccounts();
     if (res.status === false) {
       console.log(res.error);
+      setLoading(false);
     }
     if (res.status === true && res.accounts) {
       setAccounts(res.accounts);
+      setLoading(false);
     }
+  };
+  const addNewWallet = async () => {
+    setLoading2(true);
+    const ac = await CreateNewWallet();
+    if (ac.status === true) {
+      router.push(`/wallet/${ac.account?.id}/${ac.wallet?.id}`);
+      setLoading2(false);
+    }
+    setLoading2(false);
   };
   React.useEffect(() => {
     fetchAccounts();
@@ -45,7 +58,7 @@ export const SidebarItem = () => {
         <div className="flex flex-col items-start justify-start gap-2 h-full">
           {accounts.map((account, index) => (
             <Link
-              href={`/wallet/${account.id}/${account.wallets[0].id}`}
+              href={`/wallet/${account.id}/${account.wallets[0]?.id}`}
               className="w-10 h-10 rounded-full flex items-center justify-center border shadow-inner shadow-slate-800 hover:bg-slate-800 transition-all duration-150 cursor-pointer"
               key={account.id}
             >
@@ -88,17 +101,29 @@ export const SidebarItem = () => {
           </div>
         </DialogTrigger>
         <DialogContent className="z-[999]">
-          <DialogHeader>
-            <DialogTitle>Create Wallet</DialogTitle>
-            <DialogDescription>
-              Create a new wallet to start sending and receiving transactions.
-            </DialogDescription>
-          </DialogHeader>
+          {loading2 ? (
+            <div className="flex items-center justify-center h-10 w-full">
+              <Skeleton className="w-20 h-8" />
+            </div>
+          ) : (
+            <DialogHeader>
+              <DialogTitle>Create Wallet</DialogTitle>
+              <DialogDescription>
+                Create a new wallet to start sending and receiving transactions.
+              </DialogDescription>
+            </DialogHeader>
+          )}
           <div className="flex gap-2 w-full items-center justify-center">
-            <Button className="w-1/2" onClick={() => CreateNewWallet()}>
+            <Button
+              disabled={loading2}
+              className="w-1/2"
+              onClick={() => addNewWallet()}
+            >
               Add new Wallet
             </Button>
-            <Button className="w-1/2">Import Wallet</Button>
+            <Button disabled={loading2} className="w-1/2">
+              Import Wallet
+            </Button>
           </div>
         </DialogContent>
       </Dialog>

@@ -5,10 +5,10 @@ import { Keypair } from "@solana/web3.js";
 import bs58 from "bs58";
 import { derivePath } from "ed25519-hd-key";
 import nacl from "tweetnacl";
-import { useServerSession } from "@/hook/use-server-session";
+import { getServerSession } from "@/hook/use-server-session";
 
 export const CreateNewAccount = async () => {
-  const { user } = await useServerSession();
+  const { user } = await getServerSession();
   if (!user) {
     return { status: false, error: "User not found", code: 404 };
   }
@@ -47,7 +47,7 @@ export const GetWalletsOfAAccount = async ({
 }: {
   accountId: string;
 }) => {
-  const { user } = await useServerSession();
+  const { user } = await getServerSession();
   if (!user) {
     return { status: false, error: "User not found", code: 404 };
   }
@@ -67,7 +67,7 @@ export const GetWalletsOfAAccount = async ({
 };
 
 export const CreateWallet = async ({ accountId }: { accountId: string }) => {
-  const { user } = await useServerSession();
+  const { user } = await getServerSession();
   if (!user) {
     return { status: false, error: "User not found", code: 404 };
   }
@@ -123,7 +123,7 @@ export const CreateWallet = async ({ accountId }: { accountId: string }) => {
 };
 
 export const GetAccounts = async () => {
-  const { user } = await useServerSession();
+  const { user } = await getServerSession();
   if (!user) {
     return { status: false, error: "User not found", code: 404 };
   }
@@ -156,7 +156,7 @@ export const GetAccounts = async () => {
 };
 
 export const GetWallet = async ({ walletId }: { walletId: string }) => {
-  const { user } = await useServerSession();
+  const { user } = await getServerSession();
   if (!user) {
     return { status: false, error: "User not found", code: 404 };
   }
@@ -176,7 +176,7 @@ export const GetWallet = async ({ walletId }: { walletId: string }) => {
 };
 
 export const GetAccountById = async ({ accountId }: { accountId: string }) => {
-  const { user } = await useServerSession();
+  const { user } = await getServerSession();
   if (!user) {
     return { status: false, error: "User not found", code: 404 };
   }

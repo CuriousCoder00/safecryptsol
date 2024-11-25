@@ -1,13 +1,13 @@
 "use server";
 
-import { useServerSession } from "@/hook/use-server-session";
+import { getServerSession } from "@/hook/use-server-session";
 
 import { CreateWallet } from "@/actions/wallet";
 import { generateMnemonic, mnemonicToSeedSync } from "bip39";
 import db from "@/lib/db";
 
 export const CreateNewWallet = async () => {
-  const { user } = await useServerSession();
+  const { user } = await getServerSession();
   if (!user) {
     return { status: false, error: "User not found", code: 404 };
   }

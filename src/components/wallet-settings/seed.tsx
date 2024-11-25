@@ -10,7 +10,7 @@ import {
 } from "../ui/dialog";
 import { Button } from "../ui/button";
 import { Eye } from "lucide-react";
-import { getAccountById } from "@/actions/wallet";
+import { GetAccountById } from "@/actions/wallet";
 import { usePathname } from "next/navigation";
 import { AC } from "@prisma/client";
 
@@ -21,7 +21,7 @@ const Seed = () => {
   const path = usePathname();
   const accountId = path.split("/")[2];
   const fetchWallet = async () => {
-    const res = await getAccountById({ accountId });
+    const res = await GetAccountById({ accountId });
     if (res.status === false) {
       console.log(res.error);
     }

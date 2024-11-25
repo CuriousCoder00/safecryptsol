@@ -12,7 +12,6 @@ import { GetAccounts } from "@/actions/wallet";
 import { Skeleton } from "../ui/skeleton";
 import Link from "next/link";
 import { Button } from "../ui/button";
-import { usePathname } from "next/navigation";
 import { CreateNewWallet } from "@/actions/onboarding";
 
 export const Sidebar = () => {
@@ -27,16 +26,14 @@ export const SidebarItem = () => {
   const [accounts, setAccounts] = React.useState<any[]>([]);
   const [loading, setLoading] = React.useState<boolean>(false);
 
-  const path = usePathname();
   const fetchAccounts = async () => {
     setLoading(true);
     const res = await GetAccounts();
     if (res.status === false) {
       console.log(res.error);
     }
-    if (res.accounts) {
+    if (res.status === true && res.accounts) {
       setAccounts(res.accounts);
-      setLoading(false);
     }
   };
   React.useEffect(() => {

@@ -1,4 +1,4 @@
-import { getWalletsOfAAccount } from "@/actions/wallet";
+import { GetWalletsOfAAccount } from "@/actions/wallet";
 import { CreateWallet } from "@/components/wallet/create-wallet";
 import db from "@/lib/db";
 import { redirect } from "next/navigation";
@@ -8,7 +8,7 @@ const WalletPage = async () => {
   if (!account) {
     return <CreateWallet />;
   }
-  const wallets = await getWalletsOfAAccount({
+  const wallets = await GetWalletsOfAAccount({
     accountId: account?.id as string,
   });
   if (wallets && wallets.wallets && wallets.wallets.length > 0) {

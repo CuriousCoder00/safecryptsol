@@ -11,7 +11,7 @@ import {
 import { Button } from "../ui/button";
 import { Eye } from "lucide-react";
 import { Wallet } from "@prisma/client";
-import { getWallet } from "@/actions/wallet";
+import { GetWallet } from "@/actions/wallet";
 import { usePathname } from "next/navigation";
 
 const Keys = () => {
@@ -20,7 +20,7 @@ const Keys = () => {
   const path = usePathname();
   const walletId = path.split("/")[3];
   const fetchWallet = async () => {
-    const res = await getWallet({ walletId });
+    const res = await GetWallet({ walletId });
     if (res.status === false) {
       console.log(res.error);
     }

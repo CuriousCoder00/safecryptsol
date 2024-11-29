@@ -52,7 +52,7 @@ model AC {
   mnemonics String[]
   seed      String
 
-  acN Int @unique
+  acN Int
 
   wallets Wallet[]
 

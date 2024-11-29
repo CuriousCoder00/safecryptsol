@@ -18,10 +18,8 @@ export const Wallet = ({ walletId }: Props) => {
   useEffect(() => {
     startTransition(() => {
       GetWallet({ walletId }).then((res) => {
-        if (res.status === true) {
-          if (res.wallet) {
-            setWallet(res.wallet);
-          }
+        if (res.wallet) {
+          setWallet(res.wallet);
         }
       });
     });

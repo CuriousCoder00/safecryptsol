@@ -10,7 +10,7 @@ export const CreateWallet = () => {
   useEffect(() => {
     startTransition(() => {
       CreateNewWallet().then((res) => {
-        router.push(`/wallet`);
+        if (res.status) router.push(`/wallet`);
       });
     });
   }, []);
